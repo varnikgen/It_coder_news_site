@@ -11,6 +11,9 @@ class News(models.Model):
     update_at = models.DateTimeField(auto_now=True, verbose_name='Дата обновления')
     is_published = models.BooleanField(default=True, verbose_name='Опубликовано')
 
+    def my_func(self):
+        return "Hello from model"
+
     def __str__(self) -> str:
         return self.title
 
