@@ -1,6 +1,6 @@
 <div class="list-group">
     {% for category_item in categories %}        
-        <a href="{% url 'category' category_item.pk %}" class="list-group-item list-group-item-action {% if arg1 == category_item.pk %} active {% endif %}">
+        <a href="{{ category_item.get_absolute_url }}" class="list-group-item list-group-item-action {% if category_pk == category_item.pk %} active {% endif %}">
             {{ category_item.name }}
         </a>
     {% endfor %}

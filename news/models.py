@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 class News(models.Model):
@@ -11,8 +12,8 @@ class News(models.Model):
     update_at = models.DateTimeField(auto_now=True, verbose_name='Дата обновления')
     is_published = models.BooleanField(default=True, verbose_name='Опубликовано')
 
-    def my_func(self):
-        return "Hello from model"
+    def get_absolute_url(self):
+        return reverse('view_news', kwargs={'pk': self.pk})
 
     def __str__(self) -> str:
         return self.title
@@ -25,6 +26,9 @@ class News(models.Model):
 
 class Category(models.Model):
     name = models.CharField(verbose_name='Название', max_length=50, db_index=True)
+
+    def get_absolute_url(self):
+        return reverse('category', kwargs={'pk': self.pk})
 
     def __str__(self) -> str:
         return self.name

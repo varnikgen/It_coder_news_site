@@ -1,4 +1,7 @@
 {% load news_tags %}
+
+{% comment %}
+
 {% get_categories as categories %}
 <div class="list-group">
     {% for category_item in categories %}        
@@ -9,4 +12,7 @@
 </div>
 
 <br>
-{% show_categories arg1=category.pk %}
+   
+{% endcomment %}
+    
+{% show_categories category_pk=category.pk %}
