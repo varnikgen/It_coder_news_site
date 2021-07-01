@@ -5,7 +5,7 @@ from django.urls import reverse
 class News(models.Model):
 
     title = models.CharField(verbose_name='Название', max_length=150)
-    category = models.ForeignKey('Category', verbose_name='Категория', on_delete=models.PROTECT, null=True, blank=True)
+    category = models.ForeignKey('Category', verbose_name='Категория', on_delete=models.PROTECT)
     photo = models.ImageField(blank=True, upload_to='photos/%Y/%m/%d/')
     content = models.TextField(blank=True, verbose_name='Контент')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
