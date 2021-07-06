@@ -21,13 +21,27 @@ class HomeNews(ListView):
         return News.objects.filter(is_published=True)
 
 
-def index(request):
-    news = News.objects.all()
-    context = {
-        'news': news, 
-        'title': 'Список новостей',
-        }
-    return render(request, 'news/index.html', context)
+class NewsByCategory(ListView):
+    model=News
+    template_name = 'news/home_news_list.html'
+    context_object_name = 'news'
+    allow_empty = False
+
+    def get_queryset(self):
+        return News.objects.filter(category_id=self.kwargs['pk'], is_published=True)
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context =  super().get_context_data(**kwargs)
+        context['title'] = Category.objects.get(pk=self.kwargs['pk']).name
+        return context
+
+# def index(request):
+#     news = News.objects.all()
+#     context = {
+#         'news': news, 
+#         'title': 'Список новостей',
+#         }
+#     return render(request, 'news/index.html', context)
 
 
 def get_category(request, pk):
